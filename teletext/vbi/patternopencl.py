@@ -113,8 +113,8 @@ class PatternOpenCL(Pattern):
     def __init__(self, filename):
         Pattern.__init__(self, filename)
 
-        self.queue = cl.CommandQueue(openclctx, properties=cl.command_queue_properties.PROFILING_ENABLE)
-        #self.queue = cl.CommandQueue(openclctx)
+        #self.queue = cl.CommandQueue(openclctx, properties=cl.command_queue_properties.PROFILING_ENABLE)
+        self.queue = cl.CommandQueue(openclctx)
 
         mf = cl.mem_flags
 
@@ -188,7 +188,7 @@ class PatternOpenCL(Pattern):
         e_out = cl.enqueue_copy(self.queue, self.result_minidx_np, self.result_minidx, wait_for = (e_min2,))
         e_out.wait()
 
-        if 1:
+        if 0:
           print("s/e: {}/{} n: {} len: {}  / total: {} Copy: {} correlate: {} min1: {} min2: {} copy-out: {}",
               self.start, self.end,
               self.n, len(inp),
